@@ -1,14 +1,21 @@
+// Update with your config settings.
+
+/**
+ * @type { Object.<string, import("knex").Knex.Config> }
+ */
 module.exports = {
+
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './src/db/dev.sqlite3'
-    }.
+      filename: './db/app.sqlite3'
+    },
     migrations: {
-      directory: __dirname + '/src/migrations',
+      directory: "./db/migrations"
     },
     seeds: {
-      directory: __dirname + '/src/seeds'
-    }
+      directory: "./db/seeds"
+    },
+    useNullAsDefault: true
   }
 };
