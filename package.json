@@ -2,10 +2,9 @@
   "name": "dev",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "type": "module",
+  "main": "index.mjs",
   "scripts": {
-    "start": "npx nodemon index.js"
+    "start": "npx nodemon index.mjs"
   },
   "keywords": [],
   "author": "",
