@@ -3,7 +3,9 @@
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
-module.exports = {
+import path from 'path';
+
+export default {
 
   development: {
     client: 'sqlite3',
@@ -14,7 +16,7 @@ module.exports = {
       directory: "./db/migrations"
     },
     seeds: {
-      directory: "./db/seeds"
+      directory: "./db/seeds/"
     },
     useNullAsDefault: true
   }
