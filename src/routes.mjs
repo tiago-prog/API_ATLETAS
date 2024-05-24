@@ -1,14 +1,17 @@
 import express from 'express';
-
-const router = express.Router();
-
+import dotenv from 'dotenv';
 import AtletaController from './controllers/AtletaController.mjs';
 
-router.get("/atletas", (req, res) => AtletaController.index(req, res))
-router.get("/atletas/:id", (req, res) => AtletaController.show(req, res))
-router.post("/atletas", (req, res) => AtletaController.create(req, res))
-router.put("/atletas/:id", (req, res) => AtletaController.update(req, res))
-router.delete("/atletas/:id", (req, res) => AtletaController.update(req, res))
+dotenv.config();
+const router = express.Router();
+
+
+
+router.get(`/API_KEY=${process.env.API_KEY}/atletas`, (req, res) => AtletaController.index(req, res))
+router.get(`/API_KEY=${process.env.API_KEY}/atletas/:id`, (req, res) => AtletaController.show(req, res))
+router.post(`/API_KEY=${process.env.API_KEY}/atletas`, (req, res) => AtletaController.create(req, res))
+router.put(`/API_KEY=${process.env.API_KEY}/atletas/:id`, (req, res) => AtletaController.update(req, res))
+router.delete(`/API_KEY=${process.env.API_KEY}/atletas/:id`, (req, res) => AtletaController.update(req, res))
 
 
 export default router;
