@@ -1,5 +1,6 @@
 import db from "../../db/db.mjs"
 
+
 export default  {
     async index(req, res) {
         const atletas = await db.select(
@@ -16,6 +17,7 @@ export default  {
             else (atletas[i].training) 
                 atletas[i].training = JSON.parse(atletas[i].training)
         }
+    
         
         res.send(atletas)
     },
@@ -28,7 +30,9 @@ export default  {
             'goal',
             'zones',
             'training')
-            res.send(atleta)
+            atleta[0].zones = JSON.parse(atleta[0].zones)
+            atleta[0].training = JSON.parse(atleta[0].training)
+            res.send(atleta)    
         } catch (error) {
             res.status(500).send('Something broke!')
             console.error(error)
