@@ -9,7 +9,6 @@ export default  {
             'zones',
             'training'
         ).from('atletas_table')
-        let _atletas = []
 
         for (let i = 0; i < atletas.length; i++) {
             if (atletas[i].zones) 
@@ -18,13 +17,22 @@ export default  {
                 atletas[i].training = JSON.parse(atletas[i].training)
         }
         
-        
-        console.log()
         res.send(atletas)
     },
-    show(req, res) {
+    async show(req, res) {
         const id = req.params;
-        res.send({ ...id })
+        try {
+            const atleta = await db('atletas_table').where('atleta_id', id.id).select(
+            'atleta_id',
+            'username',
+            'goal',
+            'zones',
+            'training')
+            res.send(atleta)
+        } catch (error) {
+            res.status(500).send('Something broke!')
+            console.error(error)
+        }
         console.log('Mostrar Atleta');
     },
     create(req, res) {
