@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import routes from './src/routes.mjs';
 import dotenv from 'dotenv';
+import bodyParser from 'body-parser';
 
 dotenv.config();
 
@@ -14,7 +15,8 @@ process.env.STATUS === 'production'
 const app = express();
 
 app.use(cors())
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(routes);
 
