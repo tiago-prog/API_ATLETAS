@@ -22,9 +22,9 @@ export default  {
         res.send(atletas)
     },
     async show(req, res) {
-        const id = req.params;
+        const { id } = req.params;
         try {
-            const atleta = await db('atletas_table').where('atleta_id', id.id).select(
+            const atleta = await db('atletas_table').where('atleta_id', id).select(
             'atleta_id',
             'username',
             'goal',
@@ -34,25 +34,56 @@ export default  {
             atleta[0].training = JSON.parse(atleta[0].training)
             res.send(atleta)    
         } catch (error) {
-            res.status(500).send('Something broke!')
+            res.status(400).send({ message: "atleta.show.nok", id })
             console.error(error)
         }
-        console.log('Mostrar Atleta');
     },
-    create(req, res) {
+    async create(req, res) {
         const atleta = req.body;
-        console.log('Criar Atleta');
-        res.send({ message: "atleta.create.ok", ...atleta })
+        try {
+           const id = await db('atletas_table')
+                .returning('atleta_id')
+                .insert({
+                    username: atleta.username,
+                    goal: atleta.goal,
+                    zones: JSON.stringify(atleta.zones),
+                    training: JSON.stringify(atleta.training)
+                })
+            console.log(id)
+            res.send({ message: "atleta.create.ok", ...id[0] })
+        } catch (error) {
+            res.send({ message: "atleta.create.nok" })
+            console.error(error)
+        }
     },
-    update(req, res) {
-        const id = req.params;
-        res.send({ ...id })
-        console.log('Atualizar Atleta');
+    async update(req, res) {
+        const { id } = req.params
+        const atleta = req.body
+        try {
+            await db('atletas_table')
+                .where('atleta_id', id)
+                .update({
+                    username: atleta.username,
+                    goal: atleta.goal,
+                    zones: JSON.stringify(atleta.zones),
+                    training: JSON.stringify(atleta.training)
+                })
+            res.status(200).send({ message: "atleta.update.ok", id })
+        } catch (error) {
+            res.status(400).send({ message: "atleta.update.nok", id })
+            console.error(error)
+        }
 
     },
-    delete(req, res) {
-        const id = req.params;
-        res.send({ ...id })
-        res.send({ message: "atleta.delete.ok" })
+    async delete(req, res) {
+        const { id } = req.params;
+        console.log(id)
+        try {
+            await db('atletas_table').where('atleta_id', id).del()
+            res.status(200).send({ message: "atleta.delete.ok", id })
+        } catch (error) {
+            res.status(400).send({ message: "atleta.delete.nok", id })
+            console.error(error)
+        }
     }
-}
+} 

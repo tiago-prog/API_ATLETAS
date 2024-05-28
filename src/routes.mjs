@@ -11,7 +11,7 @@ router.get(`/API_KEY=${process.env.API_KEY}/atletas`, (req, res) => AtletaContro
 router.get(`/API_KEY=${process.env.API_KEY}/atletas/:id`, (req, res) => AtletaController.show(req, res))
 router.post(`/API_KEY=${process.env.API_KEY}/atletas`, (req, res) => AtletaController.create(req, res))
 router.put(`/API_KEY=${process.env.API_KEY}/atletas/:id`, (req, res) => AtletaController.update(req, res))
-router.delete(`/API_KEY=${process.env.API_KEY}/atletas/:id`, (req, res) => AtletaController.update(req, res))
+router.delete(`/API_KEY=${process.env.API_KEY}/atletas/:id`, (req, res) => AtletaController.delete(req, res))
 
 
 export default router;
