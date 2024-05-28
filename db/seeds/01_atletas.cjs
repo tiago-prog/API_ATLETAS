@@ -66,10 +66,10 @@ exports.seed = async function(knex) {
   
 
   // Deletes ALL existing entries
-  // await knex('atletas_table').del()
+  await knex('atletas_table').del()
   await knex('atletas_table').insert([
     {
-      username: 'RONOLD', 
+      username: 'Isaac', 
       goal: 'Ganhar Massa Moscular Perniana',
       zones: JSON.stringify(zonesData),
       training: JSON.stringify(trainingData),
