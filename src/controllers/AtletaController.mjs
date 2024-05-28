@@ -40,6 +40,10 @@ export default  {
     },
     async create(req, res) {
         const atleta = req.body;
+        if(typeof atleta.username != "string" || typeof atleta.goal != "string") {
+            res.status(400).send({ message: "atleta.create.nok" })
+            return
+        }
         try {
            const id = await db('atletas_table')
                 .returning('atleta_id')
@@ -49,7 +53,6 @@ export default  {
                     zones: JSON.stringify(atleta.zones),
                     training: JSON.stringify(atleta.training)
                 })
-            console.log(id)
             res.send({ message: "atleta.create.ok", ...id[0] })
         } catch (error) {
             res.send({ message: "atleta.create.nok" })
