@@ -1,10 +1,10 @@
 # API_ATLETAS
 
-### INTRODUÇÃO:
+### INTRODUCTION:
 
 API created in KnexJS, Express and SQLITE3. Made to suit the Athletes Calendar application
 
-### DEPENDÊNCIAS:
+### DEPENDENCIES:
 
 - "body-parser": "^1.20.2",
 - "cors": "^2.8.5",
