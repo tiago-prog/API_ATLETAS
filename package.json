@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.mjs",
   "scripts": {
-    "start": "npx nodemon index.mjs"
+    "start": "node index.msj",
+    "dev": "npx nodemon index.mjs"
   },
   "keywords": [],
   "author": "",
